@@ -1,0 +1,41 @@
+{
+    "name": "artox-lab/clarc-messenger-bundle",
+    "description": "Message bus adapter for Artox Lab CLARC bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Meliukh",
+            "email": "d.meliukh@artox.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "artox-lab/abstract-bus-event-message": "0.2.1",
+        "artox-lab/bus-event-message": "dev-iss41944",
+        "symfony/framework-bundle": "^5.0",
+        "symfony/messenger": "^5.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "ArtoxLab\\Bundle\\ClarcMessengerBundle\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://gitlab.artoxlab.com/artox-lab/bus-event-message.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/artox-lab/abstract-bus-event-message.git"
+        }
+    ]
+}
