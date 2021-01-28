@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Producer\EventAction;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventAction;
 
 interface EventActionInterface
 {

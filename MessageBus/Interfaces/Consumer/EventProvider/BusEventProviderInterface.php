@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\EventProvider;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\EventProvider;
 
 interface BusEventProviderInterface
 {

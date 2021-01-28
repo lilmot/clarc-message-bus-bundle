@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event;
 
 use ArtoxLab\AbstractBusEventMessage\V1\BusMessageInterface;
 use ArtoxLab\AbstractBusEventMessage\V1\Events\EventInterface;

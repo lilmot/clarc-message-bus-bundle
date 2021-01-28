@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Producer\EventMessage;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventMessage;
 
 use ArtoxLab\AbstractBusEventMessage\V1\BusMessageFactoryInterface;
 use ArtoxLab\AbstractBusEventMessage\V1\BusMessageInterface;
 use ArtoxLab\AbstractBusEventMessage\V1\Events\EventInterface;
-use ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Stamp\EventActionStamp;
+use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Stamp\EventActionStamp;
 use RuntimeException;
 use Symfony\Component\Messenger\Envelope;
 

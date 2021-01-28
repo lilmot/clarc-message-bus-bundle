@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\DependencyInjection;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\DependencyInjection;
 
-use ArtoxLab\Bundle\ClarcMessengerBundle\ArtoxLabClarcMessengerBundle;
+use ArtoxLab\Bundle\ClarcMessageBusBundle\ArtoxLabClarcMessageBusBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder() : TreeBuilder
     {
-        $treeBuilder = new TreeBuilder(ArtoxLabClarcMessengerBundle::CONFIG_BUNDLE_NAMESPACE);
+        $treeBuilder = new TreeBuilder(ArtoxLabClarcMessageBusBundle::CONFIG_BUNDLE_NAMESPACE);
 
         $this->getRootNode($treeBuilder)
             ->children()
@@ -63,7 +63,7 @@ class Configuration implements ConfigurationInterface
             return $treeBuilder->getRootNode();
         }
 
-        return $treeBuilder->root(ArtoxLabClarcMessengerBundle::CONFIG_BUNDLE_NAMESPACE);
+        return $treeBuilder->root(ArtoxLabClarcMessageBusBundle::CONFIG_BUNDLE_NAMESPACE);
     }
 
 }

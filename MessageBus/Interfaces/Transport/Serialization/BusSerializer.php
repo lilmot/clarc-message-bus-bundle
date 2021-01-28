@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Transport\Serialization;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Transport\Serialization;
 
 use ArtoxLab\AbstractBusEventMessage\V1\BusMessageFactoryInterface;
-use ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\EventProvider\BusEventProviderInterface;
-use ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Producer\EventMessage\EventMessageInterface;
+use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\EventProvider\BusEventProviderInterface;
+use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventMessage\EventMessageInterface;
 use InvalidArgumentException;
 use JsonException;
 use RuntimeException;
@@ -90,7 +90,7 @@ class BusSerializer implements SerializerInterface
         $message = $this->busMessageFactory->create((string) $encodedEnvelope['body']);
 
         return new Envelope(
-            (new $eventClass($message)),
+            (new $eventClass($message, $message->data)),
             [$this->getRedeliveryStamp($encodedEnvelope)]
         );
     }

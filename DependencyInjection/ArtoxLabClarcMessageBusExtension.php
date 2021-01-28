@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Extension of an ArtoxLabClarcMessengerExtension
+ * Extension of an ArtoxLabClarcMessageBusExtension
  *
  * @author Dmitry Meliukh <d.meliukh@artox.com>
  */
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\DependencyInjection;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\DependencyInjection;
 
 use Exception;
 use InvalidArgumentException;
@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class ArtoxLabClarcMessengerExtension extends Extension implements PrependExtensionInterface
+class ArtoxLabClarcMessageBusExtension extends Extension implements PrependExtensionInterface
 {
 
     /**
@@ -49,7 +49,7 @@ class ArtoxLabClarcMessengerExtension extends Extension implements PrependExtens
                         'default_middleware' => 'allow_no_handlers',
                         'middleware'         => [
                             'validation',
-                            'artox_lab_clarc_messenger.middleware.add_redelivery_stamp_middleware',
+                            'artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware',
                         ],
                     ],
                 ],
@@ -95,7 +95,7 @@ class ArtoxLabClarcMessengerExtension extends Extension implements PrependExtens
     private function loadBus(array $config, ContainerBuilder $container): void
     {
         if (false === empty($config['middleware']['add_redelivery_stamp_middleware']['retry_count'])) {
-            $definition = $container->getDefinition('artox_lab_clarc.bus.middleware.add_redelivery_stamp_middleware');
+            $definition = $container->getDefinition('artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware');
             $definition->setArgument(
                 '$retryCount',
                 $config['middleware']['add_redelivery_stamp_middleware']['retry_count']

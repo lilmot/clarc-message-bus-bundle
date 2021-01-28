@@ -3,37 +3,37 @@ services:
     autowire: true
     autoconfigure: true
 
-  artox_lab_clarc_messenger.producer.event_message:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Producer\EventMessage\EventMessage
+  artox_lab_clarc_message_bus.producer.event_message:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventMessage\EventMessage
 
-  ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Producer\EventAction\EventActionInterface: '@artox_lab_clarc_messenger.producer.event_message'
+  ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventMessage\EventMessageInterface: '@artox_lab_clarc_message_bus.producer.event_message'
 
-  artox_lab_clarc_messenger.consumer.created_event:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event\BusCreatedEvent
-    tags: [ 'artox_lab_clarc_messenger.producer.events' ]
+  artox_lab_clarc_message_bus.consumer.created_event:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event\BusCreatedEvent
+    tags: [ 'artox_lab_clarc_message_bus.consumer.events' ]
 
-  artox_lab_clarc_messenger.consumer.updated_event:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event\BusUpdatedEvent
-    tags: [ 'artox_lab_clarc_messenger.producer.events' ]
+  artox_lab_clarc_message_bus.consumer.updated_event:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event\BusUpdatedEvent
+    tags: [ 'artox_lab_clarc_message_bus.consumer.events' ]
 
-  artox_lab_clarc_messenger.consumer.deleted_event:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event\BusDeletedEvent
-    tags: [ 'artox_lab_clarc_messenger.producer.events' ]
+  artox_lab_clarc_message_bus.consumer.deleted_event:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event\BusDeletedEvent
+    tags: [ 'artox_lab_clarc_message_bus.consumer.events' ]
 
-  ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event\BusCreatedEventInterface: '@artox_lab_clarc_messenger.consumer.created_event'
+  ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event\BusCreatedEventInterface: '@artox_lab_clarc_message_bus.consumer.created_event'
 
-  ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event\BusUpdatedEventInterface: '@artox_lab_clarc_messenger.consumer.updated_event'
+  ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event\BusUpdatedEventInterface: '@artox_lab_clarc_message_bus.consumer.updated_event'
 
-  ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event\BusDeletedEventInterface: '@artox_lab_clarc_messenger.consumer.deleted_event'
+  ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event\BusDeletedEventInterface: '@artox_lab_clarc_message_bus.consumer.deleted_event'
 
-  artox_lab_clarc_messenger.consumer.event_provider:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\EventProvider\BusEventProvider
-    arguments: [ !tagged_iterator artox_lab_clarc_messenger.producer.events ]
+  artox_lab_clarc_message_bus.consumer.event_provider:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\EventProvider\BusEventProvider
+    arguments: [ !tagged_iterator artox_lab_clarc_message_bus.consumer.events ]
 
-  ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\EventProvider\BusEventProviderInterface: '@artox_lab_clarc_messenger.consumer.event_provider'
+  ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\EventProvider\BusEventProviderInterface: '@artox_lab_clarc_message_bus.consumer.event_provider'
 
-  artox_lab_clarc_messenger.middleware.add_redelivery_stamp_middleware:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Middleware\AddRedeliveryStampMiddleware
+  artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Middleware\AddRedeliveryStampMiddleware
 
-  artox_lab_clarc_messenger.transport.bus_serializer:
-    class: ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Transport\Serialization\BusSerializer
+  artox_lab_clarc_message_bus.transport.bus_serializer:
+    class: ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Transport\Serialization\BusSerializer

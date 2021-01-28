@@ -8,9 +8,9 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Consumer\Event;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\Event;
 
-use ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Producer\EventAction\EventActionInterface;
+use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventAction\EventActionInterface;
 
 class BusCreatedEvent extends BusEvent implements BusCreatedEventInterface
 {

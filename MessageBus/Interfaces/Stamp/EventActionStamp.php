@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace ArtoxLab\Bundle\ClarcMessengerBundle\Messenger\Interfaces\Stamp;
+namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Stamp;
 
 use Symfony\Component\Messenger\Stamp\StampInterface;
 
