@@ -25,4 +25,5 @@ class CreatedHandler implements MessageHandlerInterface
     {
         // ...
     }
+
 }

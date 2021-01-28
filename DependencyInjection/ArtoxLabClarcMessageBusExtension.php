@@ -44,7 +44,7 @@ class ArtoxLabClarcMessageBusExtension extends Extension implements PrependExten
     {
         $config = [
             'messenger' => [
-                'buses'       => [
+                'buses' => [
                     'message.bus' => [
                         'default_middleware' => 'allow_no_handlers',
                         'middleware'         => [
@@ -95,7 +95,9 @@ class ArtoxLabClarcMessageBusExtension extends Extension implements PrependExten
     private function loadBus(array $config, ContainerBuilder $container): void
     {
         if (false === empty($config['middleware']['add_redelivery_stamp_middleware']['retry_count'])) {
-            $definition = $container->getDefinition('artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware');
+            $definition = $container->getDefinition(
+                'artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware'
+            );
             $definition->setArgument(
                 '$retryCount',
                 $config['middleware']['add_redelivery_stamp_middleware']['retry_count']

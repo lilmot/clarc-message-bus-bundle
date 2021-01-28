@@ -25,4 +25,5 @@ class DeletedHandler implements MessageHandlerInterface
     {
         // ...
     }
+
 }

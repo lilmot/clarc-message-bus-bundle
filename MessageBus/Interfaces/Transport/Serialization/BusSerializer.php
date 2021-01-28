@@ -128,7 +128,9 @@ class BusSerializer implements SerializerInterface
     {
         $stamp = $envelope->last(RedeliveryStamp::class);
 
-        if (null === $stamp) {
+        if (null === $stamp
+            || false === ($stamp instanceof RedeliveryStamp)
+        ) {
             throw new RuntimeException('RedeliveryStamp should not be empty');
         }
 

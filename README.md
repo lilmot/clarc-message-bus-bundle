@@ -46,10 +46,10 @@ Configure bundle
 # config/packages/artox_lab_clarc_message_bus.yaml
 
 artox_lab_clarc_message_bus:
-  bus:
-    middleware:
-      add_redelivery_stamp_middleware:
-        retry_count: 10
+    bus:
+        middleware:
+            add_redelivery_stamp_middleware:
+                retry_count: 10
 
 ```
 
@@ -68,17 +68,17 @@ need to configure the services for the interfaces:
 # config/services.yaml
 
 app_message_bus.producer.bus_event_message_factory:
-  class: YourLib\BusEventMessage\V1\BusMessageFactory
+    class: YourLib\BusEventMessage\V1\BusMessageFactory
 
 ArtoxLab\AbstractBusEventMessage\V1\BusMessageFactoryInterface: '@app_message_bus.producer.bus_event_message_factory'
 
 app_message_bus.producer.bus_event_message:
-  class: YourLib\BusEventMessage\V1\BusMessage
+    class: YourLib\BusEventMessage\V1\BusMessage
 
 ArtoxLab\AbstractBusEventMessage\V1\BusMessageInterface: '@app_message_bus.producer.bus_event_message'
 
 app_message_bus.producer.bus_event:
-  class: YourLib\BusEventMessage\V1\Events\BaseEvent
+    class: YourLib\BusEventMessage\V1\Events\BaseEvent
 
 ArtoxLab\AbstractBusEventMessage\V1\Events\EventInterface: '@app_message_bus.producer.bus_event'
 ```
@@ -89,32 +89,32 @@ ArtoxLab\AbstractBusEventMessage\V1\Events\EventInterface: '@app_message_bus.pro
 # config/packages/messenger.yaml
 
 framework:
-  messenger:
-    buses:
-      message.bus:
-        middleware:
-          - validation
-          - artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware
+    messenger:
+        buses:
+            message.bus:
+                middleware:
+                    - validation
+                    - artox_lab_clarc_message_bus.middleware.add_redelivery_stamp_middleware
 
-    transports:
-      example:
-        dsn: "%env(RABBITMQ_TRANSPORT_DSN)%"
-        serializer: artox_lab_clarc_message_bus.transport.bus_serializer
-        retry_strategy:
-          delay: 10000
-          max_retries: 10
-          multiplier: 1
-        options:
-          exchange:
-            name: "events.example"
-            type: "topic"
-            flags: 4
-          queues:
-            events:
-              binding_keys: [ '#' ]
+        transports:
+            example:
+                dsn: "%env(RABBITMQ_TRANSPORT_DSN)%"
+                serializer: artox_lab_clarc_message_bus.transport.bus_serializer
+                retry_strategy:
+                    delay: 10000
+                    max_retries: 10
+                    multiplier: 1
+                options:
+                    exchange:
+                        name: "events.example"
+                        type: "topic"
+                        flags: 4
+                    queues:
+                        events:
+                            binding_keys: [ '#' ]
 
-    routing:
-      'YourLib\BusEventMessage\V1\Events\ExampleEvent': [example]
+        routing:
+            'YourLib\BusEventMessage\V1\Events\ExampleEvent': [ example ]
 ```
 
 #### Exchange type "topic"
@@ -126,18 +126,19 @@ Configure [RabbitMqBundle](https://github.com/artox-lab/RabbitMqBundle)
 # config/packages/old_sound_rabbit_mq.yaml
 
 old_sound_rabbit_mq:
-  connections:
-    default:
-      url: '%env(RABBITMQ_TRANSPORT_DSN)%'
+    connections:
+        default:
+            url: '%env(RABBITMQ_TRANSPORT_DSN)%'
 
-  producers:
-    example:
-      connection:       default
-      exchange_options: {name: 'events.example', type: topic, auto_delete: true, durable: true}
-      service_alias:    example
+    producers:
+        example:
+            connection: default
+            exchange_options: { name: 'events.example', type: topic, auto_delete: true, durable: true }
+            service_alias: example
 ```
 
-Open a command console, enter your project directory and execute the following commands to create queues and setup transports:
+Open a command console, enter your project directory and execute the following commands to create queues and setup
+transports:
 
 ```bash
 $ php bin/console rabbitmq:setup-fabric

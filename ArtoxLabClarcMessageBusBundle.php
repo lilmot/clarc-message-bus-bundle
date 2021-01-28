@@ -1,7 +1,7 @@
 <?php
 
 /**
- *
+ * ArtoxLab Clean Architecture message bus bundle
  *
  * @author Dmitry Meliukh <d.meliukh@artox.com>
  */

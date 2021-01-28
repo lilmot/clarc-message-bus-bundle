@@ -25,4 +25,5 @@ class UpdatedHandler implements MessageHandlerInterface
     {
         // ...
     }
+
 }

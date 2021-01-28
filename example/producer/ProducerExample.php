@@ -4,6 +4,8 @@
  * Example: Produce messages to message bus
  *
  * @author Dmitry Meliukh <d.meliukh@artox.com>
+ *
+ * phpcs:disable Squiz.NamingConventions.ValidVariableName.NotCamelCaps
  */
 
 declare(strict_types=1);
@@ -48,7 +50,7 @@ class ProducerExample
      */
     public function produce(): void
     {
-        $event               = new YourLib\BusEventMessage\V1\Events\ExampleEvent();
+        $event = new YourLib\BusEventMessage\V1\Events\ExampleEvent();
         $event->example_id   = 1;
         $event->example_name = 'Name';
 

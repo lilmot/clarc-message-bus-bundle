@@ -62,7 +62,9 @@ class EventMessage implements EventMessageInterface
         $event       = $envelope->getMessage();
         $actionStamp = $envelope->last(EventActionStamp::class);
 
-        if (null === $actionStamp) {
+        if (null === $actionStamp
+            || false === ($actionStamp instanceof EventActionStamp)
+        ) {
             throw new RuntimeException('EventActionStamp should not be empty');
         }
 

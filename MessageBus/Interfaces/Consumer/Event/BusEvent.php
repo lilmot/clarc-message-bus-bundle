@@ -78,7 +78,7 @@ abstract class BusEvent implements BusEventInterface
      */
     public function setAttributes(array $props): bool
     {
-        $this->event->setAttributes($props);
+        return $this->event->setAttributes($props);
     }
 
     /**

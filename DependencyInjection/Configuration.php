@@ -4,6 +4,8 @@
  * Configuration of bundle
  *
  * @author Dmitry Meliukh <d.meliukh@artox.com>
+ *
+ * phpcs:disable PEAR.WhiteSpace.ObjectOperatorIndent.Incorrect
  */
 
 declare(strict_types=1);
