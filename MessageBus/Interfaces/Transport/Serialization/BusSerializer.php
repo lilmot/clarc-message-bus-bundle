@@ -13,6 +13,7 @@ namespace ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Transport\
 use ArtoxLab\AbstractBusEventMessage\V1\BusMessageFactoryInterface;
 use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Consumer\EventProvider\BusEventProviderInterface;
 use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Producer\EventMessage\EventMessageInterface;
+use ArtoxLab\Bundle\ClarcMessageBusBundle\MessageBus\Interfaces\Stamp\EventActionStamp;
 use InvalidArgumentException;
 use JsonException;
 use RuntimeException;
@@ -132,6 +133,15 @@ class BusSerializer implements SerializerInterface
             || false === ($stamp instanceof RedeliveryStamp)
         ) {
             throw new RuntimeException('RedeliveryStamp should not be empty');
+        }
+
+        $actionStamp = $envelope->last(EventActionStamp::class);
+        $message     = $envelope->getMessage();
+
+        if (null === $actionStamp
+            && true === isset($message->message->action)
+        ) {
+            $envelope = $envelope->with(new EventActionStamp($message->message->action));
         }
 
         return [
