@@ -71,7 +71,7 @@ class EventMessage implements EventMessageInterface
         $message         = $this->busMessageFactory->create();
         $message->action = $actionStamp->getActionName();
         $message->type   = $event->getEventName();
-        $message->data   = $event;
+        $message->data   = $event->getAttributes();
 
         return $message;
     }
