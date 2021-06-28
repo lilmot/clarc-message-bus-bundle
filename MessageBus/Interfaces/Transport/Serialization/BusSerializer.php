@@ -18,6 +18,7 @@ use InvalidArgumentException;
 use JsonException;
 use RuntimeException;
 use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Exception\MessageDecodingFailedException;
 use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
@@ -80,15 +81,27 @@ class BusSerializer implements SerializerInterface
      */
     public function decode(array $encodedEnvelope): Envelope
     {
-        $messageBody = json_decode($encodedEnvelope['body'], false, 512, JSON_THROW_ON_ERROR);
-
-        $eventClass = $this->eventProvider->getEventClass($messageBody->action);
-
-        if (null === $eventClass) {
-            throw new InvalidArgumentException("Event class not found for action {$messageBody->action}");
+        try {
+            $messageBody = json_decode($encodedEnvelope['body'], true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $exception) {
+            throw new MessageDecodingFailedException('Encoded envelope should be a valid json');
         }
 
-        $message = $this->busMessageFactory->create((string) $encodedEnvelope['body']);
+        if (false === isset($messageBody['action'])) {
+            throw new MessageDecodingFailedException('Message should have "action" property');
+        }
+
+        $eventClass = $this->eventProvider->getEventClass($messageBody['action']);
+
+        if (null === $eventClass) {
+            throw new MessageDecodingFailedException("Event class not found for action \"{$messageBody['action']}\"");
+        }
+
+        try {
+            $message = $this->busMessageFactory->create((string) $encodedEnvelope['body']);
+        } catch (InvalidArgumentException $exception) {
+            throw new MessageDecodingFailedException("Invalid message: " . $exception->getMessage());
+        }
 
         return new Envelope(
             (new $eventClass($message, $message->data)),
