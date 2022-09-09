@@ -1,5 +1,5 @@
 {
-    "name": "artox-lab/clarc-message-bus-bundle",
+    "name": "lilmot/clarc-message-bus-bundle",
     "description": "Message bus adapter for Artox Lab CLARC bundle",
     "type": "symfony-bundle",
     "license": "MIT",
@@ -10,12 +10,12 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=8.1",
         "ext-json": "*",
         "artox-lab/abstract-bus-event-message": "1.0.0",
-        "symfony/framework-bundle": "^5.0",
-        "symfony/messenger": "^5.0",
-        "symfony/validator": "^5.0"
+        "symfony/framework-bundle": "6.1.*",
+        "symfony/messenger": "6.1.*",
+        "symfony/validator": "6.1.*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
