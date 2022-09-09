@@ -1,5 +1,5 @@
 {
-    "name": "lilmot/clarc-message-bus-bundle",
+    "name": "artox-lab/clarc-message-bus-bundle",
     "description": "Message bus adapter for Artox Lab CLARC bundle",
     "type": "symfony-bundle",
     "license": "MIT",
